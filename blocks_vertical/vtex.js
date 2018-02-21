@@ -265,12 +265,12 @@ Blockly.Blocks['vtex_payment_installments'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_payment_installments",
-      //"mutator": "mutator_range",
+      "mutator": "mutator_range",
       "message0": "Installment is %1 %2 and %3",
       "args0": [
         {
           "type": "field_dropdown",
-          "name": "comparison",
+          "name": "PROPERTY",
           "options": [
             ['greater than', '_is_greater_than_'],
             ['greater or equal than', '_is_greater_or_equal_than_'],
@@ -628,8 +628,94 @@ Blockly.Blocks['wedo_whendistanceclose'] = {
 
 
 
-// // JS expects a mixin with all of the required methods
-// Blockly.Extensions.registerMutator('mutator_range',
-//   null, null,
-//   // This last argument configures the editor UI on web
-//   [null]);
+var buildShadowDom_ = function(type) {
+  var shadowDom = goog.dom.createDom('shadow');
+  if (type == 'n') {
+    var shadowType = 'math_number';
+    var fieldName = 'NUM';
+    var fieldValue = '1';
+  } else {
+    var shadowType = 'text';
+    var fieldName = 'TEXT';
+    var fieldValue = '';
+  }
+  shadowDom.setAttribute('type', shadowType);
+  var fieldDom = goog.dom.createDom('field', null, fieldValue);
+  fieldDom.setAttribute('name', fieldName);
+  shadowDom.appendChild(fieldDom);
+  return shadowDom;
+};
+
+
+/**
+ * Mixin for mutator functions in the 'math_is_divisibleby_mutator'
+ * extension.
+ * @mixin
+ * @augments Blockly.Block
+ * @package
+ */
+var IS_RANGE_MUTATOR_MIXIN = {
+  /**
+   * Create XML to represent whether the 'divisorInput' should be present.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var mustShowSecondInput = (this.getFieldValue('PROPERTY') == '_is_between_' || this.getFieldValue('PROPERTY') == '_is_not_between_');
+    container.setAttribute('must_show_second_input', mustShowSecondInput);
+    return container;
+  },
+  /**
+   * Parse XML to restore the 'divisorInput'.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var mustShowSecondInput = (xmlElement.getAttribute('must_show_second_input') == 'true');
+    this.updateShape_(mustShowSecondInput);
+  },
+  /**
+   * Modify this block to have (or not have) an input for 'is divisible by'.
+   * @param {boolean} divisorInput True if this block has a divisor input.
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function(must_show_second_input) {
+    // Add or remove a Value Input.
+    var inputExists = this.getInput('BIN_UPPER_BOUND');
+    if (must_show_second_input) {
+      if (!inputExists) {
+        var input = this.appendValueInput('BIN_UPPER_BOUND')
+                        .appendField('and')
+                        .setCheck('Number');
+        console.dir(input);
+        input.connection.setShadowDom(buildShadowDom_('n'));
+        input.connection.appendField('and');
+        console.dir(input);
+      }
+    } else if (inputExists) {
+      this.removeInput('BIN_UPPER_BOUND');
+    }
+  }
+};
+
+/**
+ * 'math_is_divisibleby_mutator' extension to the 'math_property' block that
+ * can update the block shape (add/remove divisor input) based on whether
+ * property is "divisble by".
+ * @this Blockly.Block
+ * @package
+ */
+var ID_RANGE_MUTATOR_EXTENSION = function() {
+  this.getField('PROPERTY').setValidator(function(option) {
+    var mustShowSecondInput = (option == '_is_between_' || option == '_is_not_between_');
+    this.sourceBlock_.updateShape_(mustShowSecondInput);
+  });
+};
+
+
+
+Blockly.Extensions.registerMutator('mutator_range',
+    IS_RANGE_MUTATOR_MIXIN,
+    ID_RANGE_MUTATOR_EXTENSION);
