@@ -165,9 +165,9 @@ Blockly.Blocks['control_stop'] = {
       "inputsInline": true,
       "previousStatement": null,
       "category": Blockly.Categories.control,
-      "colour": Blockly.Colours.control.primary,
-      "colourSecondary": Blockly.Colours.control.secondary,
-      "colourTertiary": Blockly.Colours.control.tertiary
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
     });
   }
 };

@@ -100,25 +100,6 @@ Blockly.Blocks['motion_turnleft'] = {
   }
 };
 
-Blockly.Blocks['motion_pointindirection'] = {
-  /**
-   * Block to point in direction.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": "point in direction %1",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "DIRECTION"
-        }
-      ],
-      "category": Blockly.Categories.motion,
-      "extensions": ["colours_motion", "shape_statement"]
-    });
-  }
-};
 
 Blockly.Blocks['motion_pointtowards_menu'] = {
   /**

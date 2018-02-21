@@ -12,6 +12,37 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
+
+Blockly.Blocks['vtex_when_teaser'] = {
+  /**
+   * Block for when flag clicked.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_when_teaser",
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_whenflagclicked.svg",
+          "width": 40,
+          "height": 40,
+          "alt": "When green flag clicked",
+          "flip_rtl": true
+        }
+      ],
+      "inputsInline": true,
+      "nextStatement": null,
+      "category": Blockly.Categories.event,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};
+
+
 Blockly.Blocks['vtex_control_group'] = {
   /**
    * Block for repeat n times (external number).
@@ -21,28 +52,28 @@ Blockly.Blocks['vtex_control_group'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_control_group",
-      "message0": "%1 %2",
-      "args0": [
+      "message0": "group",
+      "message1": "%1", // Statement
+      "message2": "%1", // Icon
+      "lastDummyAlign2": "RIGHT",
+      "args1": [
         {
           "type": "input_statement",
           "name": "SUBSTACK"
-        },
+        }
+      ],
+      "args2": [
         {
           "type": "field_image",
           "src": Blockly.mainWorkspace.options.pathToMedia + "icons/vtex/control/parenthesis.svg",
-          "width": 40,
-          "height": 40,
+          "width": 24,
+          "height": 24,
           "alt": "*",
           "flip_rtl": true
         }
       ],
-      "inputsInline": true,
-      "previousStatement": null,
-      "nextStatement": null,
       "category": Blockly.Categories.control,
-      "colour": Blockly.Colours.control.primary,
-      "colourSecondary": Blockly.Colours.control.secondary,
-      "colourTertiary": Blockly.Colours.control.tertiary
+      "extensions": ["colours_control", "shape_statement"]
     });
   }
 };
@@ -93,8 +124,8 @@ Blockly.Blocks['vtex_operator_or'] = {
         {
           "type": "field_image",
           "src": Blockly.mainWorkspace.options.pathToMedia + "icons/vtex/operators/or.svg",
-          "width": 40,
-          "height": 40,
+          "width": 30,
+          "height": 30,
           "alt": "O",
           "flip_rtl": true
         }
@@ -143,25 +174,55 @@ Blockly.Blocks['vtex_operator_not'] = {
   }
 };
 
-// Blockly.Blocks['pen_changepencolorby'] = {
-//   /**
-//    * Block to change the pen's color by the value.
-//    * @this Blockly.Block
-//    */
-//   init: function() {
-//     this.jsonInit({
-//       "message0": "change pen color by %1",
-//       "args0": [
-//         {
-//           "type": "input_value",
-//           "name": "COLOR"
-//         }
-//       ],
-//       "category": Blockly.Categories.pen,
-//       "extensions": ["colours_pen", "shape_statement"]
-//     });
-//   }
-// };
+
+Blockly.Blocks['vtex_when_evaluate_teaser'] = {
+  /**
+   * Block for when broadcast received.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_when_evaluate_teaser",
+      "message0": "when I evaluate a teaser",
+      "category": Blockly.Categories.event,
+      "extensions": ["colours_event", "shape_hat"]
+    });
+  }
+};
+
+
+Blockly.Blocks['vtex_payment_method'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_payment_method",
+      "message0": "Payment method is %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['American Express (1)', '1'],
+            ['Diners (2)', '2'],
+            ['Visa (3)', '3'],
+            ['Mastercard (4)', '4'],
+            ['Boleto (6)', '6'],
+            ['Cartao Cencosud (501)', '501']
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.looks,
+      "colour": Blockly.Colours.looks.primary,
+      "colourSecondary": Blockly.Colours.looks.secondary,
+      "colourTertiary": Blockly.Colours.looks.tertiary
+    });
+  }
+};
 
 Blockly.Blocks['vtex_payment_bin'] = {
   /**
@@ -171,15 +232,8 @@ Blockly.Blocks['vtex_payment_bin'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_payment_bin",
-      "message0": "%1 %2 between %3 %4",
+      "message0": "BIN %1 %2",
       "args0": [
-        {
-          "type": "field_image",
-          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/event_when-broadcast-received_blue.svg",
-          "width": 40,
-          "height": 40,
-          "alt": "Broadcast received"
-        },
         {
           "type": "field_dropdown",
           "name": "IS",
@@ -190,11 +244,8 @@ Blockly.Blocks['vtex_payment_bin'] = {
         },
         {
           "type": "input_value",
-          "name": "START"
-        },
-        {
-          "type": "input_value",
-          "name": "END"
+          "name": "BIN",
+          "check": "Number"
         }
       ],
       "previousStatement": null,
@@ -207,6 +258,90 @@ Blockly.Blocks['vtex_payment_bin'] = {
   }
 };
 
+Blockly.Blocks['vtex_payment_installments'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_payment_installments",
+      //"mutator": "mutator_range",
+      "message0": "Installment is %1 %2 and %3",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "comparison",
+          "options": [
+            ['greater than', '_is_greater_than_'],
+            ['greater or equal than', '_is_greater_or_equal_than_'],
+            ['smaller than', '_is_smaller_than_'],
+            ['smaller or equal than', '_is_smaller_or_equal_than_'],
+            ['equal', '_is_equal_'],
+            ['not equal', '_is_not_equal_'],
+            ['not between', '_is_not_between_'],
+            ['between', '_is_between_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_LOWER_BOUND",
+          "check": "Number"
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_UPPER_BOUND",
+          "check": "Number"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.looks,
+      "colour": Blockly.Colours.looks.primary,
+      "colourSecondary": Blockly.Colours.looks.secondary,
+      "colourTertiary": Blockly.Colours.looks.tertiary
+    });
+  }
+};
+
+
+Blockly.Blocks['vtex_payment_bin_range'] = {
+  /**
+   * Block to set color of LED
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_payment_bin_range",
+      "message0": "BIN %1 between %2 and %3",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_LOWER_BOUND",
+          "check": "Number"
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_UPPER_BOUND",
+          "check": "Number"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.looks,
+      "colour": Blockly.Colours.looks.primary,
+      "colourSecondary": Blockly.Colours.looks.secondary,
+      "colourTertiary": Blockly.Colours.looks.tertiary
+    });
+  }
+};
 
 Blockly.Blocks['vtex_dropdown_paymentmethod'] = {
   /**
@@ -490,3 +625,11 @@ Blockly.Blocks['wedo_whendistanceclose'] = {
     });
   }
 };
+
+
+
+// // JS expects a mixin with all of the required methods
+// Blockly.Extensions.registerMutator('mutator_range',
+//   null, null,
+//   // This last argument configures the editor UI on web
+//   [null]);

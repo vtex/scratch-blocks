@@ -96,7 +96,7 @@ Blockly.Blocks['event_whenbroadcastreceived'] = {
   init: function() {
     this.jsonInit({
       "id": "event_whenbroadcastreceived",
-      "message0": "%1 %2",
+      "message0": "%1 %2 between %3 %4",
       "args0": [
         {
           "type": "field_image",
@@ -106,8 +106,20 @@ Blockly.Blocks['event_whenbroadcastreceived'] = {
           "alt": "Broadcast received"
         },
         {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_']
+          ]
+        },
+        {
           "type": "input_value",
-          "name": "CHOICE"
+          "name": "START"
+        },
+        {
+          "type": "input_value",
+          "name": "END"
         }
       ],
       "inputsInline": true,

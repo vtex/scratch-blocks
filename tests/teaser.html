@@ -107,13 +107,18 @@ h1 {
   <xml id="toolbox-categories" style="display: none">
      <category name="Events" colour="210" secondaryColour="0">
       <block type="event_whenflagclicked"></block>
+      <block type="control_stop"></block>
     </category>
     <sep></sep>
 
     <!-- <block type="control_repeat"></block> -->
-    <category name="Payment Method" secondaryColour="0">
+    <category name="Groups" secondaryColour="0">
       <block type="vtex_control_group"></block>
-      <block type="vtex_control_and"></block>
+
+    </category>
+
+    <category name="Payment" secondaryColour="0">
+      <block type="vtex_payment_bin"></block>
       <block type="wedo_setcolor">
         <value name="CHOICE">
           <shadow type="vtex_dropdown_paymentmethod">
@@ -121,20 +126,12 @@ h1 {
           </shadow>
         </value>
       </block>
+    </category>
 
-      <block type="vtex_operator_add">
-        <value name="NUM1">
-          <shadow type="math_number">
-            <field name="NUM"></field>
-          </shadow>
-        </value>
-        <value name="NUM2">
-          <shadow type="math_number">
-            <field name="NUM"></field>
-          </shadow>
-        </value>
-      </block>
-
+    <category name="Operators" secondaryColour="0">
+      <block type="vtex_operator_and"></block>
+      <block type="vtex_operator_or"></block>
+      <block type="vtex_operator_not"></block>
     </category>
 
     <!-- <block type="control_repeat"></block> -->
