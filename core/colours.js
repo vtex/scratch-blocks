@@ -46,9 +46,9 @@ Blockly.Colours = {
     "tertiary": "#BD42BD"
   },
   "control": {
-    "primary": "#D6D8E0",
-    "secondary": "#DADADA",
-    "tertiary": "#142032"
+    "primary": "#DF487A",
+    "secondary": "#FF4D6A",
+    "tertiary": "#FF3355"
   },
   "event": {
     "primary": "#142032",
@@ -66,9 +66,9 @@ Blockly.Colours = {
     "tertiary": "#0B8E69"
   },
   "operators": {
-    "primary": "#142032",
-    "secondary": "#000000",
-    "tertiary": "#D6D8E0"
+    "primary": "#4C97FF",
+    "secondary": "#4280D7",
+    "tertiary": "#3373CC"
   },
   "data": {
     "primary": "#FF8C1A",

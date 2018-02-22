@@ -52,7 +52,7 @@ Blockly.Blocks['vtex_control_group'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_control_group",
-      "message0": "group",
+      "message0": "if",
       "message1": "%1", // Statement
       "message2": "%1", // Icon
       "lastDummyAlign2": "RIGHT",
@@ -74,6 +74,105 @@ Blockly.Blocks['vtex_control_group'] = {
       ],
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['vtex_control_if_else'] = {
+  /**
+   * Block for if-else.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "type": "vtex_control_if_else",
+      "message0": "if",
+      "message1": "%1", // stack1
+      "message2": "else",
+      "message3": "%1", // stack2
+      "message4": "%1", // icon
+      "lastDummyAlign4": "RIGHT",
+      "args1": [
+        {
+          "type": "input_statement",
+          "name": "SUBSTACK"
+        }
+      ],
+      "args3": [
+        {
+          "type": "input_statement",
+          "name": "SUBSTACK2"
+        }
+      ],
+      "args4": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "icons/vtex/control/parenthesis.svg",
+          "width": 24,
+          "height": 24,
+          "alt": "*",
+          "flip_rtl": true
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['vtex_control_done'] = {
+  /**
+   * Block for stop all scripts.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_control_return_true",
+      "message0": "done",
+      "inputsInline": true,
+      "previousStatement": null,
+      "category": Blockly.Categories.control,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['vtex_control_return_true'] = {
+  /**
+   * Block for stop all scripts.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_control_return_true",
+      "message0": "finish evaluation as TRUE",
+      "inputsInline": true,
+      "previousStatement": null,
+      "category": Blockly.Categories.control,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['vtex_control_return_false'] = {
+  /**
+   * Block for stop all scripts.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_control_return_false",
+      "message0": "finish evaluation as FALSE",
+      "inputsInline": true,
+      "previousStatement": null,
+      "category": Blockly.Categories.control,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
     });
   }
 };
@@ -183,7 +282,7 @@ Blockly.Blocks['vtex_when_evaluate_teaser'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_when_evaluate_teaser",
-      "message0": "when I evaluate a teaser",
+      "message0": "when evaluating a teaser",
       "category": Blockly.Categories.event,
       "extensions": ["colours_event", "shape_hat"]
     });
@@ -198,7 +297,7 @@ Blockly.Blocks['vtex_payment_method'] = {
   init: function() {
     this.jsonInit({
       "id": "vtex_payment_method",
-      "message0": "Payment method is %1",
+      "message0": "payment method is %1",
       "args0": [
         {
           "type": "field_dropdown",
@@ -266,20 +365,20 @@ Blockly.Blocks['vtex_payment_installments'] = {
     this.jsonInit({
       "id": "vtex_payment_installments",
       "mutator": "mutator_range",
-      "message0": "Installment is %1 %2 and %3",
+      "message0": "Installments are %1 %2 and %3",
       "args0": [
         {
           "type": "field_dropdown",
           "name": "PROPERTY",
           "options": [
+            ['between', '_is_between_'],
+            ['not between', '_is_not_between_'],
             ['greater than', '_is_greater_than_'],
             ['greater or equal than', '_is_greater_or_equal_than_'],
             ['smaller than', '_is_smaller_than_'],
             ['smaller or equal than', '_is_smaller_or_equal_than_'],
             ['equal', '_is_equal_'],
-            ['not equal', '_is_not_equal_'],
-            ['not between', '_is_not_between_'],
-            ['between', '_is_between_']
+            ['not equal', '_is_not_equal_']
           ]
         },
         {
@@ -683,19 +782,11 @@ var IS_RANGE_MUTATOR_MIXIN = {
    */
   updateShape_: function(must_show_second_input) {
     // Add or remove a Value Input.
-    var inputExists = this.getInput('BIN_UPPER_BOUND');
-    if (must_show_second_input) {
-      if (!inputExists) {
-        var input = this.appendValueInput('BIN_UPPER_BOUND')
-                        .appendField('and')
-                        .setCheck('Number');
-        console.dir(input);
-        input.connection.setShadowDom(buildShadowDom_('n'));
-        input.connection.appendField('and');
-        console.dir(input);
-      }
-    } else if (inputExists) {
-      this.removeInput('BIN_UPPER_BOUND');
+    var secondInput = this.getInput('BIN_UPPER_BOUND');
+    if (!must_show_second_input) {
+      secondInput.setVisible(false);
+    } else {
+      secondInput.setVisible(true);
     }
   }
 };

@@ -356,15 +356,16 @@
   <xml id="toolbox-simple" style="display: none">
     <category name="Events" colour="210" secondaryColour="0">
       <block type="vtex_when_evaluate_teaser"></block>
-      <block type="event_whenflagclicked"></block>
-      <block type="control_stop"></block>
+      <block type="vtex_control_return_true"></block>
+      <block type="vtex_control_return_false"></block>
+      <block type="vtex_control_done"></block>
     </category>
     <sep></sep>
 
     <!-- <block type="control_repeat"></block> -->
     <category name="Groups" secondaryColour="0">
       <block type="vtex_control_group"></block>
-
+      <block type="vtex_control_if_else"></block>
     </category>
 
     <category name="Payment" secondaryColour="0">
@@ -394,7 +395,7 @@
             <field name="NUM"></field>
           </shadow>
         </value>
-        <value name="BIN_UPPER_BOUND">
+        <value name="BIN_UPPER_BOUND" >
           <shadow type="math_number">
             <field name="NUM"></field>
           </shadow>
@@ -437,10 +438,6 @@
         </value>
       </block>
     </category>
-
-
-
-
 
     <category name="Looks" colour="#9966FF" secondaryColour="#774DCB">
       <block type="looks_show" id="looks_show"></block>
