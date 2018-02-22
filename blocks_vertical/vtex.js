@@ -323,6 +323,196 @@ Blockly.Blocks['vtex_payment_method'] = {
   }
 };
 
+
+Blockly.Blocks['vtex_usercontext_utm'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_usercontext_utm",
+      "message0": "User %1 %2 %3",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "UTM_DROPDOWN",
+          "options": [
+            ['utm_source', 'source'],
+            ['utm_medium', 'medium'],
+            ['utm_campaign', 'campaign'],
+            ['utmi_campaign', 'internal_campaign'],
+            ['utmi_part', 'utmi_part']
+          ]
+        },
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_'],
+            ['contains', '_contains_'],
+            ['does not contain', '_does_not_contain_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "UTM",
+          "check": "String"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.pen,
+      "colour": Blockly.Colours.pen.primary,
+      "colourSecondary": Blockly.Colours.pen.secondary,
+      "colourTertiary": Blockly.Colours.pen.tertiary
+    });
+  }
+};
+
+
+Blockly.Blocks['vtex_usercontext_emaildomain'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_usercontext_emaildomain",
+      "message0": "User email domain %1 username@%2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_'],
+            ['contains', '_contains_'],
+            ['does not contain', '_does_not_contain_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "DOMAIN",
+          "check": "String"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.pen,
+      "colour": Blockly.Colours.pen.primary,
+      "colourSecondary": Blockly.Colours.pen.secondary,
+      "colourTertiary": Blockly.Colours.pen.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['vtex_usercontext_email'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_usercontext_email",
+      "message0": "User email %1 %2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_'],
+            ['contains', '_contains_'],
+            ['does not contain', '_does_not_contain_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "DOMAIN",
+          "check": "String"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.pen,
+      "colour": Blockly.Colours.pen.primary,
+      "colourSecondary": Blockly.Colours.pen.secondary,
+      "colourTertiary": Blockly.Colours.pen.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['vtex_usercontext_firstbuy'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_usercontext_email",
+      "message0": "User %1 buying for the first time",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_']
+          ]
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.pen,
+      "colour": Blockly.Colours.pen.primary,
+      "colourSecondary": Blockly.Colours.pen.secondary,
+      "colourTertiary": Blockly.Colours.pen.tertiary
+    });
+  }
+};
+
+Blockly.Blocks['vtex_usercontext_zipcode'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "vtex_usercontext_zipcode",
+      "message0": "User zip code %1 between %2 and %3",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "IS",
+          "options": [
+            ['is', '_is_'],
+            ['is not', '_is_not_']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_LOWER_BOUND",
+          "check": "Number"
+        },
+        {
+          "type": "input_value",
+          "name": "BIN_UPPER_BOUND",
+          "check": "Number"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "category": Blockly.Categories.pen,
+      "colour": Blockly.Colours.pen.primary,
+      "colourSecondary": Blockly.Colours.pen.secondary,
+      "colourTertiary": Blockly.Colours.pen.tertiary
+    });
+  }
+};
+
+
+
 Blockly.Blocks['vtex_payment_bin'] = {
   /**
    * Block to set color of LED
@@ -356,6 +546,7 @@ Blockly.Blocks['vtex_payment_bin'] = {
     });
   }
 };
+
 
 Blockly.Blocks['vtex_payment_installments'] = {
   /**
